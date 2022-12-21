@@ -52,7 +52,8 @@ export default class MapComponent extends Component {
       
       
       {/* IS CELL JUST AN ATTRIBUTE */}
-      {((Object.prototype.toString.call(c) === "[object String]" ||c.json) && c!=="delete" && c!=="edit") && (<div style={{...c.style}} 
+    
+      {((Object.prototype.toString.call(c) === "[object String]" || c.json !== undefined) && c!=="delete" && c!=="edit") && (<div style={{...c.style}} 
       onClick={this.props.innerFunctions?.cells.includes(index)&&(
       ()=>{
         this.props.innerFunctions.functions[this.props.innerFunctions?.cells.indexOf(index)](item);
@@ -60,11 +61,30 @@ export default class MapComponent extends Component {
       }>
          {this.props.innerlinkOptions?.cells?.includes(index)?(
           <Link style={this.props.linkOptions?.styles&&this.props.linkOptions?.styles[index]? this.props.linkOptions?.styles[index]: state.linkStyleDefault} to={this.props.innerlinkOptions?.path[this.props.innerlinkOptions.cells.indexOf(index)]? this.props.innerlinkOptions.path[this.props.innerlinkOptions.cells.indexOf(index)]: this.props.innerlinkOptions.path[this.props.innerlinkOptions.path.length-1]+ item.getJson()._id}>
-      <div style={{color:c.style?.color, fontSize:c.style?.fontSize, }}>{item.getJson()[c]}</div></Link>):(<div style={{color:c.style?.color, fontSize:c.style?.fontSize, }}>{item.getJson()[c]}</div>)}</div>
+      <div style={{color:c.style?.color, fontSize:c.style?.fontSize, }}>{item.getJson()[c.json?c.json:c]}</div></Link>
+      ):(
+      <div style={{color:c.style?.color, fontSize:c.style?.fontSize, }}>{item.getJson()[c.json?c.json:c]}</div>)}</div>
       )}
 
+    {/* IS CELL PLAIN TEXT */}
+        
+    {( c.txt !== undefined) && (<div style={{...c.style}} 
+          onClick={this.props.innerFunctions?.cells.includes(index)&&(
+          ()=>{
+            this.props.innerFunctions.functions[this.props.innerFunctions?.cells.indexOf(index)](item);
+          })
+          }>
+            {this.props.innerlinkOptions?.cells?.includes(index)?(
+              <Link style={this.props.linkOptions?.styles&&this.props.linkOptions?.styles[index]? this.props.linkOptions?.styles[index]: state.linkStyleDefault} to={this.props.innerlinkOptions?.path[this.props.innerlinkOptions.cells.indexOf(index)]? this.props.innerlinkOptions.path[this.props.innerlinkOptions.cells.indexOf(index)]: this.props.innerlinkOptions.path[this.props.innerlinkOptions.path.length-1]+ item.getJson()._id}>
+          <div style={{color:c.style?.color, fontSize:c.style?.fontSize, }}>{c.txt}</div></Link>
+          ):(
+          <div style={{color:c.style?.color, fontSize:c.style?.fontSize, }}>{c.txt}</div>)}</div>
+          )}
+
+  
 
       {/* IS CELL A SPECIAL WORD */}
+
       {(c==="delete") &&(
       <div style={
           this.props.delOptions?.style?
@@ -213,7 +233,22 @@ export default class MapComponent extends Component {
               >
         <div style={{color:c.style?.color, fontSize:c.style?.fontSize}}>{item.getJson()[c]}</div></Link>):(<div style={{color:c.style?.color, fontSize:c.style?.fontSize, cursor: this.props.functions?.cells.includes(index)&&"pointer"}}>{item.getJson()[c]}</div>)}</div>
         )}
-  
+
+   {/* IS CELL PLAIN TEXT */}
+        
+    {( c.txt !== undefined) && (<div style={{...c.style}} 
+          onClick={this.props.innerFunctions?.cells.includes(index)&&(
+          ()=>{
+            this.props.innerFunctions.functions[this.props.innerFunctions?.cells.indexOf(index)](item);
+          })
+          }>
+            {this.props.innerlinkOptions?.cells?.includes(index)?(
+              <Link style={this.props.linkOptions?.styles&&this.props.linkOptions?.styles[index]? this.props.linkOptions?.styles[index]: state.linkStyleDefault} to={this.props.innerlinkOptions?.path[this.props.innerlinkOptions.cells.indexOf(index)]? this.props.innerlinkOptions.path[this.props.innerlinkOptions.cells.indexOf(index)]: this.props.innerlinkOptions.path[this.props.innerlinkOptions.path.length-1]+ item.getJson()._id}>
+          <div style={{color:c.style?.color, fontSize:c.style?.fontSize, }}>{c.txt}</div></Link>
+          ):(
+          <div style={{color:c.style?.color, fontSize:c.style?.fontSize, }}>{c.txt}</div>)}</div>
+          )}
+
   
         {/* IS CELL A SPECIAL WORD */}
         {(c==="delete") &&(

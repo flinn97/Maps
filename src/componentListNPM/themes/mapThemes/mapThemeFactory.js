@@ -3,7 +3,7 @@ import LegatoMap from './legatoStudentList'
 
 
 class MapThemeFactory {
-    operationsFactory;
+    operationsFactory; 
 
     factory ={
        default: DefaultMap.getMapTheme(),

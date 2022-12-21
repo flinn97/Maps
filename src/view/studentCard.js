@@ -70,12 +70,13 @@ class MainContent extends Component{
     let state = app.state;
     let componentList = state.componentList;
     let styles =state.styles;
-    
+   // let spawn =state.themeFactory.getThemeFactory().spawn;
 
     return(
       
-      <MapComponent  app={app} name="student" cells={[{img:"picURL"}, ["firstName", "lastName"], "_id", "delete", ]} linkOptions={{path:["/student/"], cells:[0,1,2]}}/>      
-    
+      // <MapComponent  app={app} name="homework" sectionTheme="column" cells={[["title", {json:"hwlink", style:{color:"blue", marginLeft:"3vw"}}], "description" , ]}/>  
+      <MapComponent app={app} name="student" sectionTheme="column" cells={[{img:"picURL"},["firstName","edit"],"lastName", [{json:"daystreak", styles:{...styles.appFonts.fontWeightBold}}, {txt:"keeps", style:{marginLeft:"1vw"}}, "delete"]]} /> 
+
       )
   }
 }
@@ -130,7 +131,9 @@ class BiggestCardColorTab extends Component{
 
     return(
     <div  style={{...styles?.biggestCard}}>   
-    <div style={{width:"100%", height:"100px", background:"green", borderRadius:"23px 23px 0px 0px"}}><TabContent app={app} /></div>   
+    <div style={{width:"100%", height:"100px", background:"green", borderRadius:"23px 23px 0px 0px"}}><TabContent app={app} />
+    </div>   
+    
     <div style={{height:"80%"}} className='scroller'>
       <MainContent app={app} />
       </div>
